@@ -1,0 +1,26 @@
+[project]
+name = "retro-r1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "datasets>=4.8.5",
+    "numpy<2",
+    "pandas>=2.3.3",
+    "pyarrow>=24.0.0",
+    "rdkit>=2026.3.2",
+    "torch>=2.12.0",
+    "tqdm>=4.67.3",
+    "rdchiral",
+    "mlp_retrosyn",
+]
+
+[tool.uv.sources]
+rdchiral = { path = "packages/rdchiral", editable = true }
+mlp_retrosyn = { path = "packages/mlp_retrosyn", editable = true }
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]

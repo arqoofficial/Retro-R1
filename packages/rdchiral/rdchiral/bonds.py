@@ -25,7 +25,7 @@ def bond_dirs_by_mapnum(mol):
 
 def enumerate_possible_cistrans_defs(template_r, \
         labeling_func=lambda a: a.GetAtomMapNum()):
-    '''
+    r'''
     This function is meant to take a reactant template and fully enumerate
     all the ways in which different double-bonds can have their cis/trans
     chirality specified (based on labeling_func). This is necessary because
@@ -325,7 +325,7 @@ def get_atoms_across_double_bonds(mol, labeling_func=lambda a:a.GetAtomMapNum())
     return atoms_across_double_bonds
 
 def restore_bond_stereo_to_sp2_atom(a, bond_dirs_by_mapnum):
-    '''Copy over single-bond directions (ENDUPRIGHT, ENDDOWNRIGHT) to 
+    r'''Copy over single-bond directions (ENDUPRIGHT, ENDDOWNRIGHT) to 
     the single bonds attached to some double-bonded atom, a
 
     a - atom with a double bond
