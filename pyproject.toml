@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "datasets>=4.8.5",
+    "datasets==3.4.1",
     "numpy<2",
     "pandas>=2.3.3",
     "pyarrow>=24.0.0",
@@ -22,5 +22,6 @@ mlp_retrosyn = { path = "packages/mlp_retrosyn", editable = true }
 
 [dependency-groups]
 dev = [
+    "matplotlib>=3.8.0",
     "pytest>=9.0.3",
 ]

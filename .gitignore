@@ -78,9 +78,11 @@ checkpoints/
 .cache/
 .huggingface/
 
-# Project-specific (large assets, see README-retro-r1.md)
+# Project-specific (large assets, see README.md)
 dataset/
 one_step_model/
+results/
+dataset/.starting_mols_set.pkl
 retro_data/
 verl/
 verl.zip
