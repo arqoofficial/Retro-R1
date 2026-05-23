@@ -25,7 +25,7 @@ import zipfile
 import pickle
 import random
 from rdkit import Chem
-from verl.utils.hdfs_io import copy, makedirs
+# from verl.utils.hdfs_io import copy, makedirs
 
 def canonicalize_smiles_clear_map(smiles, return_max_frag=True):
     mol = Chem.MolFromSmiles(smiles, sanitize=not False)

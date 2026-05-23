@@ -35,5 +35,7 @@ def _default_tools(env):
         return [SingleStepRetroTool(mlp_model_dump='./one_step_model/retro_star_V4.ckpt'), SelectReactionTool()]
     elif env == 'retro_noback_V2':
         return [SingleStepRetroTool(mlp_model_dump='./one_step_model/retro_star_value_ours.ckpt'), SelectReactionTool()]
+    elif env == 'retro_noback_V3':
+        return [SingleStepRetroTool(mlp_model_dump='./one_step_model/retro_star_zero_ours.ckpt'), SelectReactionTool()]
     else:
         raise NotImplementedError
