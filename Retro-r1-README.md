@@ -2,6 +2,8 @@
 
 This repository is based on the open-source codebase of [Retro*](https://github.com/binghong-ml/retro_star) and [Agent-R1](https://github.com/0russwest0/Agent-R1).
 
+For **local setup, data download, rdchiral tests, and Experiments (one-step MLP on CPU)**, see [README.md](README.md).
+
 ## Setup
 
 ### Create conda environment
