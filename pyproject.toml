@@ -9,7 +9,7 @@ dependencies = [
     "numpy<2",
     "pandas>=2.3.3",
     "pyarrow>=24.0.0",
-    "rdkit>=2026.3.2",
+    "rdkit==2024.3.2",
     "torch>=2.12.0",
     "tqdm>=4.67.3",
     "rdchiral",
