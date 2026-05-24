@@ -24,4 +24,6 @@ mlp_retrosyn = { path = "packages/mlp_retrosyn", editable = true }
 dev = [
     "matplotlib>=3.8.0",
     "pytest>=9.0.3",
+    "ipykernel>=6.29.0",
+    "jupyter>=1.0.0",
 ]
