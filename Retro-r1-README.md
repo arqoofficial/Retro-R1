@@ -6,49 +6,65 @@ For **local setup, data download, rdchiral tests, and Experiments (one-step MLP 
 
 ## Setup
 
-### Create conda environment
+### Install dependencies (GPU training)
+
+Start with the base environment from [README.md](README.md) (`uv sync`). Then add training-specific packages:
+
 ```bash
 cd Retro-R1
-conda env create --file environment.yml
-conda activate Retro_R1
+uv sync
 pip install flash-attn==2.7.4.post1
-pip install -e packages/mlp_retrosyn
-pip install -e packages/rdchiral
-unzip verl.zip
+unzip -q verl.zip
 cd verl
 pip install --no-deps -e .
+cd ..
 ```
 
-### Download the necessary files
-To reproduce the results in the paper, we also need the additional files containing the training dataset, evaluation datasets (USPTO, ChEMBL-1000), starting molecules, and the template rules.
-Files from Retro* (such as single-step model weights V1) can be downloaded from the [link](https://www.dropbox.com/s/ar9cupb18hv96gj/retro_data.zip?dl=0), and put the folders (```dataset/```, ```one_step_model/```) under this directory. The single-step model weights V2 and V3 can be downloaded from the [link](https://drive.google.com/drive/u/0/folders/13DdftEV0x55OZ8ZxHNAkmcvi_4x90hPI) and put the files (```retro_star_value_ours.ckpt```(V2) and ```retro_star_zero_ours.ckpt```(V3)) under the ```one_step_model/``` directory. The single-step model weights V4 is not released and can be trained following the instructions in [PDVN](https://github.com/DiXue98/PDVN). We can also provide the trained weights if requested. Put the trained weights under the ```one_step_model/``` directory and name it as ```retro_star_V4.ckpt```. The ChEMBL-1000 testset can be downloaded from [link](https://drive.google.com/drive/folders/198WuPlSyMeMvvd4i2SM833jPAcGllzDu?usp=sharing) and put under the folder ```dataset/```.
+`verl.zip` is included in the repository. `mlp_retrosyn` and `rdchiral` are already installed by `uv sync` (editable packages under `packages/`).
 
+> **Note:** There is no `environment.yml` in this repo. If you prefer conda, create a Python 3.10 env manually and install the same packages.
+
+### Download the necessary files
+
+To reproduce the results in the paper, download the training dataset, evaluation datasets (USPTO, ChEMBL-1000), starting molecules, and template rules. See [README.md — Step 2](README.md#step-2--download-required-files) for the full bundle ([RETRO-R1-DATA.zip](https://drive.google.com/file/d/1ESkk0spmM1C7Z-b38mGF7cEuH-5l77QP/view?usp=sharing)) or the minimal Retro* bundle.
+
+Additional details:
+
+- Retro* V1 weights: [retro_data.zip](https://www.dropbox.com/s/ar9cupb18hv96gj/retro_data.zip?dl=0) → extract `dataset/` and `one_step_model/` into the repo root.
+- V2 / V3 one-step weights: [Google Drive folder](https://drive.google.com/drive/u/0/folders/13DdftEV0x55OZ8ZxHNAkmcvi_4x90hPI) → `one_step_model/retro_star_value_ours.ckpt` (V2), `one_step_model/retro_star_zero_ours.ckpt` (V3).
+- V4 is not released; train following [PDVN](https://github.com/DiXue98/PDVN) or request weights. Save as `one_step_model/retro_star_V4.ckpt`.
+- ChEMBL-1000 testset: [Google Drive](https://drive.google.com/drive/folders/198WuPlSyMeMvvd4i2SM833jPAcGllzDu?usp=sharing) → `dataset/`.
 
 ## Preprocess the dataset
+
 ```bash
 python ./examples/data_preprocess/reaction.py
 ```
 
 ## Training
+
 ```bash
-bash training_script.py
+bash training_script.sh
 ```
 
-Note that this script only use one node with eight gpus. To use multi nodes, please follow the instructions of [verl](https://github.com/volcengine/verl).
+This script uses one node with eight GPUs. For multi-node setup, follow the [verl](https://github.com/volcengine/verl) instructions.
 
 ## Export model
-Modify the scripts ```export.sh``` and change the ori_pth, ckpt_pth and export_pth to export model from the best checkpoint.
+
+Edit `export.sh` — set `ori_pth`, `ckpt_pth`, and `export_pth` to your checkpoint paths — then run:
+
 ```bash
-bash export.py
+bash export.sh
 ```
 
-
 ## Evaluation on Retro*-190 testset
+
 ```bash
-bash test_retro_script.py
+bash test_retro_script.sh
 ```
 
 ## Evaluation on ChEMBL-1000 testset
+
 ```bash
-bash test_chembl_script.py
+bash test_chembl_script.sh
 ```

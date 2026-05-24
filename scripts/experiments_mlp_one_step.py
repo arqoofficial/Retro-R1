@@ -12,8 +12,8 @@ routes_possible_test_hard.pkl:
 
 Run from the repository root:
 
-  uv run python scripts/experiments_mlp_one_step_experiment.py
-  uv run python scripts/experiments_mlp_one_step_experiment.py --checkpoints v1,v2 --topk 5,10,20 -n 10
+  uv run python scripts/experiments_mlp_one_step.py
+  uv run python scripts/experiments_mlp_one_step.py --checkpoints v1,v2 --topk 5,10,20 -n 10
 """
 
 from __future__ import annotations

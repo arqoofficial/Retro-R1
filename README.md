@@ -2,7 +2,7 @@
 
 Retrosynthetic planning based on [Retro*](https://github.com/binghong-ml/retro_star) and [Agent-R1](https://github.com/0russwest0/Agent-R1).
 
-For full paper reproduction (training, LLM agent evaluation), see [README-retro-r1.md](README-retro-r1.md).
+For full paper reproduction (training, LLM agent evaluation), see [Retro-r1-README.md](Retro-r1-README.md).
 
 This document covers **local setup**, **downloading data**, and **Experiments** — a CPU-friendly one-step MLP benchmark without an LLM. You can run it via CLI scripts or the interactive notebook [`experiments_mlp_one_step.ipynb`](experiments_mlp_one_step.ipynb).
 
@@ -27,7 +27,7 @@ cd Retro-R1
 uv sync
 ```
 
-See [README-retro-r1.md](README-retro-r1.md) for `verl`, `flash-attn`, and multi-GPU training.
+See [Retro-r1-README.md](Retro-r1-README.md) for `verl`, `flash-attn`, and multi-GPU training.
 
 ---
 
@@ -65,7 +65,7 @@ Expand-Archive -Path RETRO-R1-DATA.zip -DestinationPath .
 **Optional CLI download** (if browser download is slow or interrupted):
 
 ```bash
-pip install gdown
+uv pip install gdown
 gdown "https://drive.google.com/uc?id=1ESkk0spmM1C7Z-b38mGF7cEuH-5l77QP" -O RETRO-R1-DATA.zip
 unzip -q RETRO-R1-DATA.zip
 ```
@@ -151,9 +151,11 @@ uv run pytest packages/rdchiral/test/test_rdchiral.py -v -k case_0
 
 Script: [`scripts/experiments_mlp_one_step.py`](scripts/experiments_mlp_one_step.py)
 
+Run all commands below from the **repository root** (`Retro-R1/`). The MLP loads a V1 reference checkpoint via the relative path `./one_step_model/...`.
+
 **What it measures**
 
-1. **top-k** reactions (5 / 10 / 20) — same default as agent `tool.topk` in training config.  
+1. **top-k** reactions (5 / 10 / 20) — same values as in agent training (`tool.topk` defaults to 5; experiments sweep 5, 10, and 20).  
 2. **Checkpoints** — `v1` (Retro* default), `v2` (`retro_star_value_ours.ckpt`), `v3` (`retro_star_zero_ours.ckpt`; optional, Google Drive).  
 3. **Stock labels** — each precursor vs `origin_dict.csv` → available / unavailable.  
 4. **Ground truth** — first step of each route in `routes_possible_test_hard.pkl` (`product>>reactants`).  
@@ -337,5 +339,5 @@ The script also prints a text summary to stdout (same metrics as the experiment 
 
 ## Related documentation
 
-- [README-retro-r1.md](README-retro-r1.md) — training, agent evaluation, ChEMBL-1000  
+- [Retro-r1-README.md](Retro-r1-README.md) — training, agent evaluation, ChEMBL-1000  
 - [packages/rdchiral/README.md](packages/rdchiral/README.md) — template application details
